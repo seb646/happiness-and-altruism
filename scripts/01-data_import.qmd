@@ -1,0 +1,69 @@
+---
+title: "Import data from the Toronto Paramedic Service via Open Data Toronto"
+format: html
+author: "Sebastian Rodriguez"
+---
+```{r}
+#### Preamble ####
+# Purpose: Import data from the Toronto Paramedic Service via Open Data Toronto
+# Author: Sebastian Rodriguez
+# Email: me@srod.ca
+# Date: 3 February 2023
+# GitHub: https://github.com/seb646/toronto-paramedic-responses
+
+#### Workspace set-up ####
+library(opendatatoronto)
+library(tidyverse)
+library(dplyr)
+```
+
+```{r}
+#| warning: false
+#### Fetch "Land Ambulance Response Time Standard" from Open Data Toronto
+# Link: https://open.toronto.ca/dataset/land-ambulance-response-time-standard 
+raw_response_data <-
+  list_package_resources("8b068db1-95b8-4ea9-b942-8a7ce3a5fbd6") |>
+  filter(name == "Response Time (2013 - 2021)") |>
+  get_resource()
+
+# Write data to a .csv file
+write_csv(
+  x = raw_response_data$`Land Ambulance Services`,
+  file = "../inputs/data/raw_response_data.csv"
+)
+```
+
+```{r}
+#| warning: false
+#### Fetch "Pre-Hospital Emergency Care Performance Metrics" from Open Data Toronto ####
+# Link: https://open.toronto.ca/dataset/pre-hospital-emergency-care-performance-metrics
+raw_performance_data <-
+  list_package_resources("174ace54-bcc7-4885-85c1-76094ab4a0ca") |>
+  filter(name == "Pre-hospital emergency care performance metrics 2014-2021") |>
+  get_resource() |>
+  filter(`Pre-Hospital Emergency Care Type` == "Emergency Request for Service")
+
+# Write data to a .csv file
+write_csv(
+  x = raw_performance_data,
+  file = "../inputs/data/raw_performance_data.csv"
+)
+```
+
+```{r}
+#| warning: false
+#### Fetch "Paramedic Services Incident Data" from Open Data Toronto ####
+# Link: https://open.toronto.ca/dataset/paramedic-services-incident-data
+raw_incident_data <-
+  list_package_resources("c21f3bd1-e016-4469-abf5-c58bb8e8b5ce") |>
+  filter(name == "paramedic-services-incident-data-2017-2021") |>
+  get_resource()
+
+# Write data to a .csv file
+write_csv(
+  x = raw_incident_data$`2021`,
+  file = "../inputs/data/raw_incident_data.csv",
+)
+
+# Note: creating this .csv may take some time as it's a large data set
+```

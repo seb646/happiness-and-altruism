@@ -1,0 +1,128 @@
+---
+title: "Import raw csv data, clean it, and generate new csv files"
+format: html
+author: "Sebastian Rodriguez"
+---
+```{r}
+#### Preamble ####
+# Purpose: Import raw csv data, clean it, and generate new csv files
+# Author: Sebastian Rodriguez
+# Email: me@srod.ca
+# Date: 3 February 2023
+# GitHub: https://github.com/seb646/toronto-paramedic-responses
+
+#### Workspace set-up ####
+library(tidyverse)
+library(dplyr)
+library(here)
+library(readr)
+library(janitor)
+```
+
+```{r}
+#### Fetch and clean the raw response data ####
+raw_happy_data <- readr::read_csv(here::here("inputs/data/raw_data.csv"), show_col_types = FALSE) |>
+  # Change column naming format
+  clean_names() |> 
+  select(year, happy) |>
+  filter(happy >= 2) |> 
+  count(year, happy) |>
+  group_by(year) |>
+  summarise(people = sum(n))
+
+raw_directions_data <- readr::read_csv(here::here("inputs/data/raw_data.csv"), show_col_types = FALSE) |>
+  # Change column naming format
+  clean_names() |> 
+  select(year, directns) |>
+  filter(directns >= 1, directns <= 4) |> 
+  count(year, directns) |>
+  group_by(year) |>
+  summarise(people = sum(n))
+
+raw_give_homeless_data <- readr::read_csv(here::here("inputs/data/raw_data.csv"), show_col_types = FALSE) |>
+  # Change column naming format
+  clean_names() |> 
+  select(year, givhmlss) |>
+  filter(givhmlss >= 1, givhmlss <= 4) |>
+  count(year, givhmlss) |>
+  group_by(year) |>
+  summarise(people = sum(n))
+
+colors <- c(
+  "Happiness" = "steelblue", 
+  "Give Directions to Stranger" = "darkred",
+  "Give Money to Homeless" = "darkgreen")
+
+ggplot() +
+  # Define axis labels
+  labs(
+    y = "People", 
+    x = "Year",
+    color = "Legend"
+  ) +
+  
+  # Set the theme
+  theme_minimal() +
+  
+  geom_line(data = raw_happy_data, aes(x = year, y = people, color = "Happiness")) +
+  geom_line(data = raw_directions_data, aes(x = year, y = people, color = "Give Directions to Stranger")) +
+  geom_line(data = raw_give_homeless_data, aes(x = year, y = people, color = "Give Money to Homeless")) +
+  scale_x_continuous(breaks=c(2002,2004,2012,2014)) +
+  scale_color_manual(values = colors)
+
+
+```
+
+```{r}
+#### Fetch and clean the raw response data ####
+raw_happy_data <- readr::read_csv(here::here("inputs/data/raw_data.csv"), show_col_types = FALSE) |>
+  # Change column naming format
+  clean_names() |> 
+  select(year, happy) |>
+  filter(happy == 3) |> 
+  count(year, happy) |>
+  group_by(year) |>
+  summarise(people = sum(n))
+
+raw_directions_data <- readr::read_csv(here::here("inputs/data/raw_data.csv"), show_col_types = FALSE) |>
+  # Change column naming format
+  clean_names() |> 
+  select(year, directns) |>
+  filter(directns >= 5) |> 
+  count(year, directns) |>
+  group_by(year) |>
+  summarise(people = sum(n))
+
+raw_give_homeless_data <- readr::read_csv(here::here("inputs/data/raw_data.csv"), show_col_types = FALSE) |>
+  # Change column naming format
+  clean_names() |> 
+  select(year, givhmlss) |>
+  filter(givhmlss >= 5) |>
+  count(year, givhmlss) |>
+  group_by(year) |>
+  summarise(people = sum(n))
+
+colors <- c(
+  "Happiness" = "steelblue", 
+  "Give Directions to Stranger" = "darkred",
+  "Give Money to Homeless" = "darkgreen")
+
+ggplot() +
+  # Define axis labels
+  labs(
+    y = "People", 
+    x = "Year",
+    color = "Legend"
+  ) +
+  
+  # Set the theme
+  theme_minimal() +
+  
+  geom_line(data = raw_happy_data, aes(x = year, y = people, color = "Happiness")) +
+  geom_line(data = raw_directions_data, aes(x = year, y = people, color = "Give Directions to Stranger")) +
+  geom_line(data = raw_give_homeless_data, aes(x = year, y = people, color = "Give Money to Homeless")) +
+  scale_x_continuous(breaks=c(2002,2004,2012,2014)) +
+  scale_color_manual(values = colors)
+
+
+```

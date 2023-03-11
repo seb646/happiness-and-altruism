@@ -1,0 +1,10 @@
+
+infile dictionary {
+
+_column(1) 	 numeric 		 BALLOT 		 %20f 		 "ballot used for interview" 
+_column(3) 	 numeric 		 HAPPY 		 %20f 		 "general happiness" 
+_column(8) 	 numeric 		 GIVHMLSS 		 %20f 		 "r has given food or money to a homeless person" 
+_column(13) 	 numeric 		 DIRECTNS 		 %20f 		 "r has given directions to a stranger" 
+_column(18) 	 numeric 		 YEAR 		 %20f 		 "GSS year for this respondent" 
+_column(23) 	 numeric 		 ID_ 		 %20f 		 "Respondent id number" 
+}

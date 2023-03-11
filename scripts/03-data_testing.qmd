@@ -1,0 +1,78 @@
+---
+title: "Testing Data from the Toronto Paramedic Service"
+format: html
+author: "Sebastian Rodriguez"
+---
+```{r}
+#### Preamble ####
+# Purpose: Testing Data from the Toronto Paramedic Service
+# Prerequisites: Need to have downloaded the data using [inputs/data/data_import.qmd]
+# Author: Sebastian Rodriguez
+# Email: me@srod.ca
+# Date: 3 February 2023
+# GitHub: https://github.com/seb646/toronto-paramedic-responses
+
+#### Workspace set-up ####
+library(tidyverse)
+library(janitor)
+library(here)
+library(readr)
+```
+
+```{r}
+#### Test the clean response data #### 
+# Fetch the clean response data 
+clean_response_data <- readr::read_csv(here::here("inputs/data/clean_response_data.csv"), show_col_types = FALSE)
+
+# Test that the target performance is less than or equal to 75%
+clean_response_data$plan_in_percentage |> max() <= 0.75
+
+# Test that the reported year is greater than or equal to 2013
+clean_response_data$response_time_standard_year |> min() >= 2013
+
+# Test that the actual performance data is less than or equal to 100%
+clean_response_data$performance_in_percentage |> max() <= 1.00
+
+# Test that the actual performance data is greater than or equal to 0%
+clean_response_data$performance_in_percentage |> min() >= 0.00
+```
+
+```{r}
+#### Test the clean performance data #### 
+# Fetch the clean performance data
+clean_performance_data <- readr::read_csv(here::here("inputs/data/clean_performance_data.csv"), show_col_types = FALSE)
+
+# Test that the reported year is greater than or equal to 2014
+clean_performance_data$year |> min() >= 2014
+
+# Test that EMS responses is a number
+clean_performance_data$ems_responses |> class() == "numeric"
+
+# Test that EMS responses is not greater than Toronto's population
+clean_performance_data$ems_responses |> max() <= 3000000
+
+# Test that EMS responses is not 0 
+clean_performance_data$ems_responses |> min() >= 0
+```
+
+```{r}
+#### Test the clean incident data #### 
+# Fetch the clean incident data
+clean_incident_data <- readr::read_csv(here::here("inputs/data/clean_incident_data.csv"), show_col_types = FALSE)
+
+# Test that the units arrived on scene is not greater than the city's number of paramedics
+clean_incident_data$units_arrived_at_scene |> max() <= 1186
+
+# Test that the units arrive on scene is greater than zero
+clean_incident_data$units_arrived_at_scene |> min() >= 0
+
+# Test that the dispatch time is a date 
+clean_incident_data$dispatch_time |> class() == "POSIXct"
+
+# Test that the incident type contains is comprised of characters
+clean_incident_data$incident_type |> class() == "character"
+
+# Note: due to an issue with the dispatch_time's column formatting as a date,
+# the second returned Boolean may be false. As long as the first value returns 
+# true, the data passes the test.
+```
