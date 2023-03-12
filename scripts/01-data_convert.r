@@ -1,9 +1,9 @@
 #### Preamble ####
-# Purpose: Import data from the Toronto Paramedic Service via Open Data Toronto
-# Author: Sebastian Rodriguez
+# Purpose: Import data from the GSS
+# Author: Sebastian Rodriguez, Iz Leitch, Randall Ni
 # Email: me@srod.ca
 # Date: 3 February 2023
-# GitHub: https://github.com/seb646/toronto-paramedic-responses
+# GitHub: https://github.com/seb646/happiness-and-altruism
 
 #### Workspace set-up ####
 library(foreign)

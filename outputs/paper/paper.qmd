@@ -1,5 +1,5 @@
 ---
-title: "Does Happiness Lead to Altruism: A review of US Generial Social Survey data"
+title: "Does Happiness Lead to Altruism: A review of US General Social Survey data"
 format: pdf
 author: "Sebastian Rodriguez, Iz Leitch, Randall Ni"
 abstract: "Something about happiness and altruism" 
@@ -18,11 +18,11 @@ thanks: "Code and data supporting this analysis is available at: https://github.
 #| warning: false
 #| output: false
 #### Preamble ####
-# Title: The Response Time of Toronto's Paramedic Service: How effective is the city's emergency medical care?
-# Author: Sebastian Rodriguez
+# Title: Does Happiness Lead to Altruism: A review of US General Social Survey data
+# Author: Sebastian Rodriguez, Iz Leitch, Randall Ni
 # Email: me@srod.ca
 # Date: 3 February 2023
-# GitHub: https://github.com/seb646/toronto-paramedic-responses
+# GitHub: https://github.com/seb646/happiness-and-altruism
 
 #### Workspace set-up ####
 # Define required libraries 
@@ -149,8 +149,6 @@ The data used in this paper was obtained through the General Social Survey (GSS)
 [^2]: Has Given Directions to a Stranger data is available at: https://gssdataexplorer.norc.org/variables/2886/vshow
 
 [^3]: Has Given Money or Food to a Homeless Person data is available at: https://gssdataexplorer.norc.org/variables/2878/vshow
-
-The General Social Survey (GSS) is a project of the independent research organization NORC at the University of Chicago, with principal funding from the National Science Foundation.
 
 **Resources Acknowledgment**
 

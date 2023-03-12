@@ -1,9 +1,9 @@
 #### Preamble ####
 # Purpose: Import raw csv data, clean it, and generate new csv files
-# Author: Sebastian Rodriguez
+# Author: Sebastian Rodriguez, Iz Leitch, Randall Ni
 # Email: me@srod.ca
 # Date: 3 February 2023
-# GitHub: https://github.com/seb646/toronto-paramedic-responses
+# GitHub: https://github.com/seb646/happiness-and-altruism
 
 #### Workspace set-up ####
 library(foreign)

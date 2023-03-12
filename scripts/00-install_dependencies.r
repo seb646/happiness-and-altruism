@@ -1,19 +1,11 @@
----
-title: "Install the dependencies required for this project"
-format: html
-author: "Sebastian Rodriguez"
----
-```{r}
 #### Preamble ####
 # Purpose: Install the dependencies required for this project
 # Prerequisites: You must also have the R language installed
-# Author: Sebastian Rodriguez
+# Author: Sebastian Rodriguez, Iz Leitch, Randall Ni
 # Email: me@srod.ca
 # Date: 3 February 2023
-# GitHub: https://github.com/seb646/toronto-paramedic-responses
-```
+# GitHub: https://github.com/seb646/happiness-and-altruism
 
-```{r}
 # Install required packages (you only need to do this once)
 install.packages("lubridate")
 install.packages("tidyverse")
@@ -27,4 +19,3 @@ install.packages("kableExtra")
 install.packages("here")
 install.packages("readr")
 install.packages("foreign")
-```

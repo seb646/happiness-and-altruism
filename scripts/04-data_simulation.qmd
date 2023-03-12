@@ -1,16 +1,16 @@
 ---
-title: "Simulating Data from the Toronto Paramedic Service"
+title: "Simulating Data from the GSS"
 format: html
-author: "Sebastian Rodriguez"
+author: "Sebastian Rodriguez, Iz Leitch, Randall Ni"
 ---
 ```{r}
 #### Preamble ####
-# Purpose: Read in data from the Toronto Paramedic Service
-# Prerequisites: Need to know where to get Toronto Paramedic Services data
-# Author: Sebastian Rodriguez
+# Purpose: Read in data from the GSS
+# Prerequisites: Need to know where to get GSS data
+# Author: Sebastian Rodriguez, Iz Leitch, Randall Ni
 # Email: me@srod.ca
 # Date: 3 February 2023
-# GitHub: https://github.com/seb646/toronto-paramedic-responses
+# GitHub: https://github.com/seb646/happiness-and-altruism
 
 #### Workspace set-up ####
 library(tidyverse) # A collection of data-related packages
