@@ -1,15 +1,15 @@
 ---
-title: "The Response Time of Toronto's Paramedic Service: How effective is the city's emergency medical care?"
+title: "Does Happiness Lead to Altruism: A review of US Generial Social Survey data"
 format: pdf
-author: "Sebastian Rodriguez^[University of Toronto, Faculty of Information]"
-abstract: "The Toronto Paramedic Services provides all pre-hospital care to the city’s inhabitants. Recent criticism of the service called into question its performance, highlighting staff shortages and institutional challenges that the city's paramedics face. This paper investigates the Toronto Paramedic Services’ efficacy by comparing its emergency response times to the standards set by provincial and municipal governments. It reveals that Toronto's paramedics meet and often exceed response time standards, and provide stroke and STEMI heart attack patients with a chance of survival greater than the provincial average." 
+author: "Sebastian Rodriguez, Iz Leitch, Randall Ni"
+abstract: "Something about happiness and altruism" 
 date: today
 date-format: long
 editor: visual
 toc: TRUE
 number-sections: TRUE
 bibliography: references.bib
-thanks: "Code and data supporting this analysis is available at: https://github.com/seb646/toronto-paramedic-responses"
+thanks: "Code and data supporting this analysis is available at: https://github.com/seb646/happiness-and-altruism"
 ---
 
 ```{r}
@@ -39,255 +39,94 @@ library(here)
 library(readr)
 
 # Fetch the the clean response data
-clean_response_data <- readr::read_csv(here::here("inputs/data/clean_response_data.csv"), show_col_types = FALSE)
+happy_positive_data <- readr::read_csv(here::here("inputs/data/clean/happy_positive_data.csv"), show_col_types = FALSE)
 
 # Fetch clean performance data
-clean_performance_data <- readr::read_csv(here::here("inputs/data/clean_performance_data.csv"), show_col_types = FALSE)
+directions_positive_data <- readr::read_csv(here::here("inputs/data/clean/directions_positive_data.csv"), show_col_types = FALSE)
 
 # Fetch the clean incident response
-clean_incident_data <- readr::read_csv(here::here("inputs/data/clean_incident_data.csv"), show_col_types = FALSE)
+homeless_positive_data <- readr::read_csv(here::here("inputs/data/clean/homeless_positive_data.csv"), show_col_types = FALSE)
+
+# Fetch the the clean response data
+happy_negative_data <- readr::read_csv(here::here("inputs/data/clean/happy_negative_data.csv"), show_col_types = FALSE)
+
+# Fetch clean performance data
+directions_negative_data <- readr::read_csv(here::here("inputs/data/clean/directions_negative_data.csv"), show_col_types = FALSE)
+
+# Fetch the clean incident response
+homeless_negative_data <- readr::read_csv(here::here("inputs/data/clean/homeless_negative_data.csv"), show_col_types = FALSE)
 ```
 
 ## Introduction
 
-A city's emergency medical services (EMS) are integral to its health care system. The paramedics and emergency medical technicians working for the service provide pre-hospital assessment, stabilisation, and care to people needing medical assistance. These professionals respond to every call from the public for aid, from broken bones and heart attacks to car accidents and house fires. Current emergency medical services operate on the principle of the "golden hour," which is the 60 minutes between an initial injury and arrival at a trauma center when a patient has the highest statistical chance of survival [@cite_golden_hour]. This "golden hour" is the foundation of all emergency medical responses and requires medical personnel to arrive on scene in under 10 minutes [@cite_golden_hour_10_mins].
+\newpage
 
-In Toronto, inhabitants receive emergency medical assistance through the Toronto Paramedic Services. As of 2020, the Toronto Paramedic Services employed 1,186 paramedics operating 234 ambulances out of 45 stations across the city [@cite_toronto_paramedic_2020_report]. The service provides all land ambulatory responses within the city, including on-scene treatment and stabilisation of patients, transport to a hospital, and transport between hospitals. The Province of Ontario and the City of Toronto set specific requirements for the length of time an ambulance should take when responding to an emergency call, which can be anywhere between 6 to 25 minutes. While the service strives to achieve these mandated goals, they face staffing, budget, and other institutional challenges that impact its ability to provide care. Recently, the service gained attention for slower response times because of staffing shortages in hospitals and in the service itself [@cite_paramedic_shortages]. These staffing shortages decrease the number of available paramedics while simultaneously increasing the time it takes for a patient to enter a hospital, tying up paramedics at hospitals. The recent COVID-19 pandemic also impacted the service, with most paramedics stating that morale is "either worse or as bad as it has ever been" [@cite_paramedic_morale].
-
-Despite the challenges that Toronto's paramedics face, they must respond to emergencies quickly to provide patients with the best chances of survival. This paper investigates the response times of the Toronto Paramedic Service compared to the mandated requirements set by the local and provincial governments. Specifically, the paper aims to place response times within a larger context of the service's responsibility and interrogate the relevance of the "golden hour" principle to determine the efficacy of the service. 
-
-The findings indicated a growing trend in the number of emergency medical calls, an increase of approximately 10,000 per year since 2014 [@cite_emergency_care_data]. Despite this increase, the Toronto Paramedic Services met and often exceeded the response times set by both the Province of Ontario and the City of Toronto. The paper also revealed a significant lack of paramedic metrics from the data sets available on Open Data Toronto. Without metrics on case-by-case response times and patient outcomes, other sources were required to inform data analysis. Overall, the response time of Toronto's paramedics contributed to stroke and mortality rates lower than Ontario's average, giving the city's inhabitants greater chances of survival when suffering from life-threatening injuries. \newpage
-
-## Paramedic Response Data
-
-### Scope of Responsibility
-
-Before investigating the response times and efficacy of the Toronto Paramedic Services, it is important to understand the service's breadth of responsibility. With a population of nearly 3 million people, Toronto requires a medical response to roughly 300,000 emergency calls every year. As the city's population grows, so too does the need for medical assistance. There was a steady increase of approximately 10,000 emergency medical requests per year from 2014 to 2019, as outlined by [@fig-1; @cite_emergency_care_data]. This trend ended briefly in 2020 when the COVID-19 pandemic hit Toronto, placing an incredible strain on the city's healthcare system. Due to a concern about COVID-19 infection, many people delayed or avoided medical care throughout the pandemic [@cite_avoiding_hospitals].
+## General Social Survey Data
 
 ```{r}
 #| messages: false
 #| echo: false
 #| warning: false
-#| fig-cap: "Number of Emergency Medical Responses in Toronto (by year since 2014)"
+#| fig-cap: "Happiness vs Altruism"
 #| label: fig-1
-#### Plot graph on the number of EMS responses in Toronto ####
-clean_performance_data |>
-  # Define plot 
-  ggplot(aes(
-    x = year, 
-    y = ems_responses
-  )) + 
-  
-  # Define axis labels
-  labs(y = "Emergency Medical Responses", x = "Year") +
-  
-  # Set the theme
-  theme_minimal() +
-  
-  # Define styles
-  theme(
-    axis.title.x = element_text(size = 9, family = "serif", face = "bold"),
-    axis.text.x = element_text(size = 8, family = "serif"),
-    axis.title.y = element_text(size = 9, family = "serif", face = "bold"),
-    axis.text.y = element_text(size = 8, family = "serif")
-  ) +
-  
-  # Set axis formats
-  scale_y_continuous(labels = function(x) format(x, scientific = FALSE)) +
-  scale_x_continuous(breaks = seq(2014, 2021, 1)) + 
-  
-  # Render bar chart
-  geom_bar(stat="identity", fill = "deepskyblue3")
-```
 
-\newpage
+colors <- c(
+  "Happiness" = "steelblue",
+  "Give Directions to Stranger" = "darkred",
+  "Give Money to Homeless" = "darkgreen"
+)
 
-To further illustrate the responsibility of Toronto's paramedics, @fig-2 outlines the number of incidents, and ambulance dispatches the service fielded in 2021 [@cite_paramedic_incident_data]. The paramedic service responded to over 310,000 calls, ranging from routine medical emergencies to motor vehicle accidents and fires. These calls required a total of 315,788 ambulances, with an average of 865 ambulances dispatched per day. Most calls and incidents need between 1 and three ambulances [@cite_paramedic_incident_data]. However, some severe incidents placed an even greater strain on the service's resources:
-
--   74 fire emergencies required 5 or more ambulances, with one incident requiring a total of 22 ambulances.
--   46 medical emergencies required 5 or more ambulances, with one incident requiring a total of 11 ambulances.
--   33 motor vehicle accidents required 5 or more ambulances, with one incident requiring a total of 11 ambulances.
-
-```{r}
-#| messages: false
-#| echo: false
-#| warning: false
-#| fig-cap: "Emergency Medical Incidents and Dispatched Ambulances (in 2021)"
-#| label: fig-2
-#### Create a table summarizing emergency medical incident data in Toronto ####
-summarized_incident_data <- clean_incident_data |>
-  # Group data by incident type
-  group_by(incident_type) |>
-  
-  # Select only incident type and arrived units
-  select(incident_type, units_arrived_at_scene) |>
-  
-  # Add new columns summarizing data
-  summarize(
-    # Calculate total number of incident per incident type
-    total_incidents = table(incident_type), 
-    
-    # Calculate total number of ambulances responding to incidents
-    units_sum = sum(units_arrived_at_scene, na.rm = TRUE), 
-    
-    # Calculate the mean of ambulances per incident 
-    the_mean = signif(mean(units_arrived_at_scene, na.rm = TRUE), digits = 2), 
-    
-    # Calculate the mean of ambulances per incident 
-    dispatches_day = round(sum(units_arrived_at_scene, na.rm = TRUE)/365, digits = 0), 
-  ) |>
-  
-  # Rename column headers
-  rename("Incident Type" = "incident_type", "Incidents" = "total_incidents", "Dispatches" = "units_sum", "Per Incident" = "the_mean", "Per Day" = "dispatches_day")
-
-# Rename "-" in data to a more meaningful label
-summarized_incident_data[1, "Incident Type"] = "Other Incident"
-
-# Order rows alphabetically by incident type
-summarized_incident_data <- summarized_incident_data[order(summarized_incident_data$`Incident Type`),]
-
-# Render table
-summarized_incident_data |>
-  # Table configuration 
-  knitr::kable(align = "l", booktabs = TRUE, escape = FALSE, linesep = "") |>
-  
-  # Add headers for table data
-  add_header_above(
-    c(" ", "Year Totals" = 2, "Dispatch Averages" = 2), 
-    align = "c",
-    bold = TRUE
-  ) |>
-  
-  # Style the table 
-  kable_styling(font_size = 10, latex_options = "hold_position", full_width = TRUE) |>
-  
-  # Make the table headers bold
-  row_spec(0, bold = TRUE) |>
-  
-  # Increase width of first column
-  column_spec(1, width = "13em") 
-```
-
-\newpage
-
-### Mandated Response Times
-
-In Ontario, the *Ambulance Act* defines the rules governing paramedics' response times. The act defines response times as the difference between the time an emergency service dispatcher receives a call and the on-scene arrival of either an ambulance or a person equipped with a defibrillator [@cite_ambulance_act]. The *Ambulance Act* mandates varying response times based on the severity of a patient's injury. To define these response times and categorize patients based on their injuries, paramedics use the Canadian Triage & Acuity Scale (CTAS). CTAS has 5 levels of severity, with level 1 representing life-threatening injuries and level 5 representing non-urgent injuries [@cite_ctas].
-
-Specific response times are defined under Regulation 257/00, Part VIII of the *Ambulance Act*. This regulation sets the response times for patients suffering from Sudden Cardiac Arrest (SCA) or a CTAS Level 1 injury as 6 minutes and 8 minutes, respectively [@cite_ambulance_act]. CTAS Levels 2 through 5 do not have mandated response times in this regulation, leaving municipalities to define their response times based on the needs of their inhabitants and the abilities of their paramedic service. @fig-3 outlines the City of Toronto's response times for each CTAS level [@cite_ambulance_response_data].
-
-```{r}
-#| messages: false
-#| echo: false
-#| warning: false
-#| fig-cap: "Mandated Response Times for the Toronto Paramedic Services (as of 2021)"
-#| label: fig-3
-#### Create a table outlining CTAS levels and response times ####
-clean_response_data |>
-  # Select type of response and estimated response plan 
-  select(patient_category, plan_in_minutes) |>
-  
-  # Remove identical rows
-  distinct() |> 
-  
-  # Create new descriptor column 
-  cbind(descriptor = c(
-    "Sudden Cardiac Arrest", 
-    "Resuscitative care", 
-    "Emergent care", 
-    "Urgent care", 
-    "Less urgent care", 
-    "Non-urgent care")
-  ) |>
-  
-  # Rename all columns to human-friendly format
-  rename(
-    "Response Level" = "patient_category", 
-    "Response Time (Mins)" = "plan_in_minutes", 
-    "Level Descriptor" = "descriptor"
-  ) |>
-  
-  # Render table
-  knitr::kable(align = "l", booktabs = TRUE, escape = FALSE, linesep = "") |>
-  
-  # Style the table 
-  kable_styling(font_size = 10, latex_options = "hold_position", full_width = TRUE) |>
-  
-  # Make the table headers bold
-  row_spec(0, bold = TRUE)
-
-```
-
-It is important to note that not all calls are mandated to receive a response time within these parameters. Individual municipalities are responsible for defining a "performance plan," which determines the percentage of calls that must be covered by their response times [@cite_ambulance_act]. In Toronto, the enacted performance plan requires 75% of all calls to receive a response within the required time frame. However, prior to 2016, only 60% of SCA calls required a response within the mandated time [@cite_ambulance_response_data]. \newpage
-
-### Actual Response Times
-
-The Toronto Paramedic Services has an excellent track record of achieving, and often exceeding, the percentage of calls receiving mandated response times. The graphs below (@fig-4) chart the percentage of incidents served by the mandated response times versus the city's set performance plan [@cite_ambulance_response_data]. To place these graphs in perspective, the City of Toronto's paramedic service averaged a response time of 6 minutes and 58 seconds for "emergency calls" in 2021 [@cite_ambulance_program].
-
-```{r}
-#| messages: false
-#| echo: false
-#| warning: false
-#| label: fig-4
-#| fig-cap: "Percent of Calls Meeting Mandated Response Times (since 2013)"
-#| fig-align: center
-#| fig-width: 10
-#| fig-height: 5
-#### Create graphs plotting mandated and actual response times ####
-# Define colors to be used in legend
-colors <- c("Actual Response" = "steelblue", "Mandated Response" = "darkred")
-
-clean_response_data |>
-  # Plot graphs, define x axis
-  ggplot(aes(x = response_time_standard_year)) + 
-  
+ggplot() +
   # Define axis labels
   labs(
-    y = "Percent of Calls", 
+    y = "People",
     x = "Year",
     color = "Legend"
   ) +
-  
+
   # Set the theme
   theme_minimal() +
-  
-  # Define styles for axis, legends, and labels
-  theme(
-    axis.title.x = element_text(size = 15, family = "serif", face = "bold"),
-    axis.text.x = element_text(size = 14, family = "serif", angle = 70, vjust = 0.7),
-    axis.title.y = element_text(size = 15, family = "serif", face = "bold"),
-    axis.text.y = element_text(size = 14, family = "serif"),
-    legend.title = element_text(size = 15, family = "serif", face = "bold"),
-    legend.text = element_text(size = 14, family = "serif"),
-    strip.text.x = element_text(size = 15, family = "serif", face = "bold"),
-    strip.text.y = element_text(size = 14, family = "serif", face = "bold")
-  ) +
-  
-  # Set axis formats
-  scale_x_continuous(breaks=seq(2013, 2021, 2)) + 
-  
-  # Render lines
-  geom_line(aes(y = plan_in_percentage, color = "Mandated Response")) + 
-  geom_line(aes(y = performance_in_percentage, color = "Actual Response")) +
-  
-  # Set colors for graph; enable legend
-  scale_color_manual(values = colors) +
-  
-  # Merge graphs into one figure
-  facet_wrap(~patient_category) 
+
+  geom_line(data = happy_positive_data, aes(x = year, y = people, color = "Happiness")) +
+  geom_line(data = directions_positive_data, aes(x = year, y = people, color = "Give Directions to Stranger")) +
+  geom_line(data = homeless_positive_data, aes(x = year, y = people, color = "Give Money to Homeless")) +
+  scale_x_continuous(breaks = c(2002, 2004, 2012, 2014)) +
+  scale_color_manual(values = colors)
 ```
 
-There was only one year when Toronto's paramedics could not meet all of the requirements set by the city's performance plan. In 2013, only 70% of patients identified as CTAS Level 1 were served by the mandated response time, as opposed to the 75% coverage promised by the performance plan [@cite_ambulance_response_data]. The data provided to the public does not indicate specific response times for each case, so it is impossible to determine how much longer response times were compared to the mandates---in some cases, it may be a difference of a few seconds or more than a few minutes. \newpage
+```{r}
+#| messages: false
+#| echo: false
+#| warning: false
+#| fig-cap: "Unhappiness vs. No Altruism"
+#| label: fig-2
 
+colors <- c(
+  "Happiness" = "steelblue",
+  "Give Directions to Stranger" = "darkred",
+  "Give Money to Homeless" = "darkgreen"
+)
+
+ggplot() +
+  # Define axis labels
+  labs(
+    y = "People",
+    x = "Year",
+    color = "Legend"
+  ) +
+
+  # Set the theme
+  theme_minimal() +
+
+  geom_line(data = happy_negative_data, aes(x = year, y = people, color = "Happiness")) +
+  geom_line(data = directions_negative_data, aes(x = year, y = people, color = "Give Directions to Stranger")) +
+  geom_line(data = homeless_negative_data, aes(x = year, y = people, color = "Give Money to Homeless")) +
+  scale_x_continuous(breaks = c(2002, 2004, 2012, 2014)) +
+  scale_color_manual(values = colors)
+```
 ## Discussion
 
-The data used for analysis in this paper was collected and published by the Toronto Paramedic Service. As such, the data is open to institutional bias. The Toronto Paramedic Services determines what data is collected and the methods used for collection. It also has specific goals for data collection: in the case of response times, they must collect the data so they can report their performance to Ontario's Ministry of Health. These goals can impact the data and cause the service to omit significant data points, such as the lack of a measured, case-by-case response time. The data also has other limitations, such as the lack of metrics after 2021.
-
-When analysing a paramedic service's efficacy, an important consideration is whether response times based on the "golden hour" are valuable metrics. In principle, the sooner a paramedic can respond to a call leads to greater efficiency, as it shortens the time paramedics spend on a call and helps patients receive more immediate care. However, healthcare professionals are debating the relevance of the "golden hour" as the foundation of emergency medical services. One study found that "there was no association between EMS intervals and mortality," suggesting that the "golden hour," in the context of EMS, did not impact a patient's chances of survival [@cite_study_1]. A separate study focusing on rural areas found that longer transport times to a trauma center "did not significantly influence survival" [@cite_study_2]. Contrasting these findings is a study from Quebec, which found that spending over 60 minutes before arriving at a trauma center had a "statistically significant" impact on a patient's odds of survival, although this study only surveyed severely injured patients requiring advanced life support (ALS) [@cite_study_3]. These studies reveal that response times based on the "golden hour" principle are of little help in determining a paramedic service's efficacy, except for the most urgent cases that require advanced measures.
-
-With this new limited scope in mind and focusing on only urgent cases, data from the Toronto Paramedic Services reveals that their quick response times effectively improved the chances of survival for critical patients. Patients in Toronto suffering from a stroke face a mortality rate of 11.3%, below the province's average of 12.9% [@cite_stroke_mortality]. Patients in Toronto suffering from a STEMI, or a heart attack caused by a complete blockage of the coronary artery, face a mortality rate of 10.9%, slightly lower than the province's average of 11.2% [@cite_stemi_mortality]. It is important to note that the Toronto Paramedic Service did not include this data in the packages made available on Open Data Toronto.
-
-The Toronto Paramedic Services should include more comprehensive metrics in the data sets they provide to Open Data Toronto. As revealed in this paper, the service's current data sets lack vital information on case-by-case response times and patient outcomes. Where permitted, the service should also include the type of medical emergency addressed by paramedics. The inclusion of these expanded data points would allow for a more meaningful analysis. \newpage
+\newpage
 
 ## Inclusive Acknowledgements
 
@@ -299,21 +138,19 @@ This statement was originally prepared in consultation with First Nations House 
 
 **Data Acknowledgement**
 
-The data used in this paper was obtained through Open Data Toronto, an initiative to provide openly accessible data about the city [@cite_about_opendatatoronto]. This paper uses three data sets from Open Data Toronto, each provided by the Toronto Paramedic Services:
+The data used in this paper was obtained through the General Social Survey (GSS), a project of the independent research organization NORC at the University of Chicago, with principal funding from the National Science Foundation. This paper uses three data sets from the NORC's GSS:
 
--   Paramedic Services Incident Data[^1]
--   Land Ambulance Response Time Standard[^2]
--   Pre-Hospital Emergency Care Performance Metrics[^3]
+-   General Happiness[^1]
+-   Has Given Directions to a Stranger[^2]
+-   Has Given Money or Food to a Homeless Person[^3]
 
-[^1]: Paramedic Services Incident Data is available at: https://open.toronto.ca/dataset/paramedic-services-incident-data
+[^1]: General Happiness data is available at: https://gssdataexplorer.norc.org/variables/434/vshow
 
-[^2]: Land Ambulance Response Time Standard is available at: https://open.toronto.ca/dataset/land-ambulance-response-time-standard
+[^2]: Has Given Directions to a Stranger data is available at: https://gssdataexplorer.norc.org/variables/2886/vshow
 
-[^3]: Pre-Hospital Emergency Care Performance Metrics is available at: https://open.toronto.ca/dataset/pre-hospital-emergency-care-performance-metrics
+[^3]: Has Given Money or Food to a Homeless Person data is available at: https://gssdataexplorer.norc.org/variables/2878/vshow
 
-This project contains information licensed under the Open Government Licence -- Toronto[^4].\
-
-[^4]: Open Government License -- Toronto is available at: https://open.toronto.ca/open-data-license/
+The General Social Survey (GSS) is a project of the independent research organization NORC at the University of Chicago, with principal funding from the National Science Foundation.
 
 **Resources Acknowledgment**
 

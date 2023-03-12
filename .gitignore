@@ -1,4 +1,18 @@
+# Ignore R specific files
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
+
+# Ignore MacOS folder attributes
+.DS_Store
+inputs/.DS_Store
+outputs/.DS_Store
+outputs/paper/.DS_Store
+
+# Ignore specific file types
+*.csv
+*.html
+*.css
+*.js
+*.woff

@@ -1,9 +1,20 @@
+#### Preamble ####
+# Purpose: Import data from the Toronto Paramedic Service via Open Data Toronto
+# Author: Sebastian Rodriguez
+# Email: me@srod.ca
+# Date: 3 February 2023
+# GitHub: https://github.com/seb646/toronto-paramedic-responses
+
+#### Workspace set-up ####
 library(foreign)
+library(tidyverse)
+library(dplyr)
 library(here)
 library(readr)
-library(dplyr)
 
-  read.dct <- function(dct, labels.included = "yes") {
+#### Convert raw data from .dat/.dct to .csv ####
+#### Code originally from NORC GSS, modified 
+read.dct <- function(dct, labels.included = "yes") {
       temp <- readLines(dct)
       temp <- temp[grepl("_column", temp)]
       switch(labels.included,
@@ -26,20 +37,20 @@ library(dplyr)
           class(out) <- classes[x] ; out }), NAMES)
       temp_metadata[["ColName"]] <- make.names(gsub("\\s", "", temp_metadata[["ColName"]]))
       temp_metadata
-  }
+}
 
-  read.dat <- function(dat, metadata_var, labels.included = "yes") {
+read.dat <- function(dat, metadata_var, labels.included = "yes") {
       read.fwf(dat, widths = metadata_var[["ColWidth"]], sep = "", col.names = metadata_var[["ColName"]])
-  }
+}
 
 
-GSS_metadata <- read.dct(here::here("inputs/data/gss-norc/GSS.dct"))
-GSS_ascii <- read.dat(here::here("inputs/data/gss-norc/GSS.dat"), GSS_metadata)
+GSS_metadata <- read.dct(here::here("inputs/data/raw/GSS.dct"))
+GSS_ascii <- read.dat(here::here("inputs/data/raw/GSS.dat"), GSS_metadata)
 attr(GSS_ascii, "col.label") <- GSS_metadata[["ColLabel"]]
 GSS <- GSS_ascii |>
   select(BALLOT, HAPPY, GIVHMLSS, DIRECTNS, YEAR)
 
 write_csv(
   x = GSS,
-  file = here::here("inputs/data/raw_data.csv"),
+  file = here::here("inputs/data/raw/GSS.csv"),
 )

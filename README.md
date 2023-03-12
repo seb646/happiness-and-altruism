@@ -1,4 +1,4 @@
-# Toronto Paramedic Services Response Times
+# Happiness and Altruism in the United States
 
 This repository contains all of the files required for an analysis of the Toronto Paramedic Services' response times. The aim of this project is to analyse the Toronto Paramedic Services' response times to determine its efficacy as an emergency medical service.
 
