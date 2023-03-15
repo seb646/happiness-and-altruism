@@ -67,7 +67,7 @@ homeless_negative_data <- readr::read_csv(here::here("inputs/data/clean/homeless
 #| messages: false
 #| echo: false
 #| warning: false
-#| fig-cap: "Happiness vs Altruism"
+#| fig-cap: "Happiness vs Giving Directions to Strangers"
 #| label: fig-1
 
 colors <- c(
@@ -89,6 +89,35 @@ ggplot() +
 
   geom_line(data = happy_positive_data, aes(x = year, y = people, color = "Happiness")) +
   geom_line(data = directions_positive_data, aes(x = year, y = people, color = "Give Directions to Stranger")) +
+  scale_x_continuous(breaks = c(2002, 2004, 2012, 2014)) +
+  scale_color_manual(values = colors)
+```
+
+```{r}
+#| messages: false
+#| echo: false
+#| warning: false
+#| fig-cap: "Happiness vs Giving Money to Homeless"
+#| label: fig-2
+
+colors <- c(
+  "Happiness" = "steelblue",
+  "Give Directions to Stranger" = "darkred",
+  "Give Money to Homeless" = "darkgreen"
+)
+
+ggplot() +
+  # Define axis labels
+  labs(
+    y = "People",
+    x = "Year",
+    color = "Legend"
+  ) +
+
+  # Set the theme
+  theme_minimal() +
+
+  geom_line(data = happy_positive_data, aes(x = year, y = people, color = "Happiness")) +
   geom_line(data = homeless_positive_data, aes(x = year, y = people, color = "Give Money to Homeless")) +
   scale_x_continuous(breaks = c(2002, 2004, 2012, 2014)) +
   scale_color_manual(values = colors)
@@ -98,8 +127,8 @@ ggplot() +
 #| messages: false
 #| echo: false
 #| warning: false
-#| fig-cap: "Unhappiness vs. No Altruism"
-#| label: fig-2
+#| fig-cap: "Unhappiness vs. Not Giving Directions to Strangers"
+#| label: fig-3
 
 colors <- c(
   "Happiness" = "steelblue",
@@ -120,6 +149,35 @@ ggplot() +
 
   geom_line(data = happy_negative_data, aes(x = year, y = people, color = "Happiness")) +
   geom_line(data = directions_negative_data, aes(x = year, y = people, color = "Give Directions to Stranger")) +
+  scale_x_continuous(breaks = c(2002, 2004, 2012, 2014)) +
+  scale_color_manual(values = colors)
+```
+
+```{r}
+#| messages: false
+#| echo: false
+#| warning: false
+#| fig-cap: "Unhappiness vs. Not Money to Homeless"
+#| label: fig-4
+
+colors <- c(
+  "Happiness" = "steelblue",
+  "Give Directions to Stranger" = "darkred",
+  "Give Money to Homeless" = "darkgreen"
+)
+
+ggplot() +
+  # Define axis labels
+  labs(
+    y = "People",
+    x = "Year",
+    color = "Legend"
+  ) +
+
+  # Set the theme
+  theme_minimal() +
+
+  geom_line(data = happy_negative_data, aes(x = year, y = people, color = "Happiness")) +
   geom_line(data = homeless_negative_data, aes(x = year, y = people, color = "Give Money to Homeless")) +
   scale_x_continuous(breaks = c(2002, 2004, 2012, 2014)) +
   scale_color_manual(values = colors)
