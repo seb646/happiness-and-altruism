@@ -14,13 +14,13 @@ Once your environment is set up, you must install several packages that handle v
 
 ### Download the data
 
-The first step in working with this project is to download following three data sets from the [General Social Survey (GSS)](https://gssdataexplorer.norc.org).
+The first step in working with this project is to download following three data sets from the [General Social Survey](https://gssdataexplorer.norc.org).
 
 - [General Happiness](https://gssdataexplorer.norc.org/variables/434/vshow)
 - [Has Given Directions to a Stranger](https://gssdataexplorer.norc.org/variables/2886/vshow)
 - [Has Given Food or Money to a Homeless Person](https://gssdataexplorer.norc.org/variables/2878/vshow)
 
-NOTE: A step-by-step guide for how to download this data is available in the `guide-download_data.md` file located in the root of this directory. 
+NOTE: A step-by-step guide for how to download this data is available [here](https://github.com/seb646/happiness-and-altruism/blob/main/guides/00-download_data.md).
 
 Once you download the data from GSS, place the `GSS.dat` and `GSS.dct` files in `inputs/data/raw` and run `scripts/01-data_covert.r` to conver the data to a `.csv` file. 
 
