@@ -10,8 +10,12 @@ inputs/.DS_Store
 outputs/.DS_Store
 outputs/paper/.DS_Store
 
-# Ignore specific file types
+# Ignore any data files
 *.csv
+*.dct
+*.dat
+
+# Ignore other file types
 *.html
 *.css
 *.js
