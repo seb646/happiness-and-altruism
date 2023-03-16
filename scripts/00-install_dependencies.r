@@ -1,9 +1,9 @@
 #### Preamble ####
 # Purpose: Install the dependencies required for this project
 # Prerequisites: You must also have the R language installed
-# Author: Sebastian Rodriguez, Iz Leitch, Randall Ni
+# Author: Sebastian Rodriguez, Randall Ni, Iz Leitch
 # Email: me@srod.ca
-# Date: 3 February 2023
+# Date: 16 March 2023
 # GitHub: https://github.com/seb646/happiness-and-altruism
 
 # Install required packages (you only need to do this once)

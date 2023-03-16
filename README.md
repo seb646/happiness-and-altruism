@@ -1,6 +1,8 @@
 # Happiness and Altruism in the United States
 
-This repository contains all of the files required for an analysis of the Toronto Paramedic Services' response times. The aim of this project is to analyse the Toronto Paramedic Services' response times to determine its efficacy as an emergency medical service.
+This repository contains all of the files necessary for an investigation of happiness and altruism in the United States using the NORC's General Social Survey (GSS) data. The aim of this study was to determine if happiness leads to altruistic behavior. 
+
+* [Read the paper](https://github.com/seb646/happiness-and-altruism/blob/main/outputs/paper/paper.pdf)
 
 ## Getting Started
 
@@ -8,31 +10,33 @@ This repository contains all of the files required for an analysis of the Toront
 
 This project requires both the [R programming language](https://www.r-project.org/) and [Quarto](https://quarto.org/docs/get-started/). If you do not have these tools in your development environment, please install them now. You will also need an integrated development environment (IDE) capable of running R scripts. I recommend [RStudio](https://posit.co/products/open-source/rstudio/) (local) or [Posit Cloud](https://posit.cloud/) (cloud-based).
 
-Once your environment is set up, you must install several packages that handle various tasks, like graphing data, creating tables, and general organization and processing. You will find a complete list of these packages in the file `scripts/00-install_dependencies.qmd`. On lines 16-29 of `00-install_dependencies.qmd`, there is a code chunk that installs all of the required dependencies for this project. You only need to run this code once to install the required dependencies.
+Once your environment is set up, you must install several packages that handle various tasks, like graphing data, creating tables, and general organization and processing. You will find a complete list of these packages in the file `scripts/00-install_dependencies.r`. You only need to run this file once to install the required dependencies.
 
 ### Download the data
 
-The first step in working with this project is to download three data sets from [Open Data Toronto](https://www.toronto.ca/city-government/data-research-maps/open-data/). Don't worry, there's no need for you to physically download any files; the code will take care of that.
+The first step in working with this project is to download following three data sets from the [General Social Survey (GSS)](https://gssdataexplorer.norc.org).
 
-The `scripts/01-data_import.qmd` file will download the required data sets for you. This file is a [Quarto](https://quarto.org/) document, which is a technical publishing system using Markdown as a foundation and allowing us to run embedded R code chunks. Within `01-data_import.qmd`, you'll see three separate R code chunks:
+- [General Happiness](https://gssdataexplorer.norc.org/variables/434/vshow)
+- [Has Given Directions to a Stranger](https://gssdataexplorer.norc.org/variables/2886/vshow)
+- [Has Given Food or Money to a Homeless Person](https://gssdataexplorer.norc.org/variables/2878/vshow)
 
--   The first chunk (lines 20-34) downloads the [Land Ambulance Response Time Standard](https://open.toronto.ca/dataset/land-ambulance-response-time-standard) package
--   The second chunk (lines 36-51) downloads the [Pre-Hospital Emergency Care Performance Metrics](https://open.toronto.ca/dataset/pre-hospital-emergency-care-performance-metrics) package
--   The third chunk (lines 53-69) downloads the [Paramedic Services Incident Data](https://open.toronto.ca/dataset/paramedic-services-incident-data) package
+NOTE: A step-by-step guide for how to download this data is available in the `guide-download_data.md` file located in the root of this directory. 
 
-Run each chunk to fetch the data sets and import the relevant data into `.csv` files. At the end of this process, you should have three new files in `inputs/data`: `raw_response_data.csv`, `raw_incident_data.csv`, and `raw_performance_data.csv`.
+Once you download the data from GSS, place the `GSS.dat` and `GSS.dct` files in `inputs/data/raw` and run `scripts/01-data_covert.r` to conver the data to a `.csv` file. 
 
 ### Clean the data
 
-Before moving to data analysis, we must clean the generated `.csv` files to help us filter, use, and understand the relevant data points. The `scripts/02-data_cleaning.qmd` file handles all of the data cleaning, including fixing column names (many have characters that cannot be used or are insufficent descriptors), selecting the appropriate columns, and filtering any rows that contain null data. Within `02-data_cleaning.qmd`, you'll see three separate R code chunks:
+Before moving to data analysis, we must clean the generated `.csv` files to help us filter, use, and understand the relevant data points. The `scripts/02-data_cleaning.r` file handles all of the data cleaning, including fixing column names (many have characters that cannot be used or are insufficent descriptors), selecting the appropriate columns, and filtering any rows that contain null data. 
 
--   The first chunk (lines 21-28) cleans `inputs/data/raw_response_data.csv`
--   The second chunk (lines 40-57) cleans `inputs/data/raw_performance_data.csv`
--   The third chunk (lines 59-73) cleans `inputs/data/raw_incident_data.csv`
+Run the file to fetch the raw data sets, clean them, and then create new `.csv` files with the clean data. At the end of this process, you should have six new files in `inputs/data/clean`:
+* `directions_negative_data.csv`
+* `directions_positive_data.csv`
+* `happy_negative_data.csv`
+* `happy_positive_data.csv`
+* `homeless_negative_data.csv`
+* `homeless_positive_data.csv`
 
-Run each chunk to fetch the raw data sets, clean them, and then create new `.csv` files with the clean data. At the end of this process, you should have three new files in `inputs/data`: `clean_response_data.csv`, `clean_incident_data.csv`, and `clean_performance_data.csv`.
-
-### Analyse the data
+### Analyze the data
 
 The core data analysis of this project occurs in the `outputs/paper/paper.qmd` file, another Quarto document. Once you render `paper.qmd`, Quarto will generate a `paper.pdf` file in the same folder. The raw references used in `paper.qmd` are available under the same folder in the `references.bib` file.
 
@@ -40,23 +44,13 @@ The core data analysis of this project occurs in the `outputs/paper/paper.qmd` f
 
 ### Test the data
 
-If you're experiencing problems with the data, I've compiled a document that tests the data against several parameters, like data types, number ranges, and data ranges. This testing document is available under the `scripts/03-data_testing.qmd` file. The file contains three code chunks testing each imported package from Open Data Toronto:
+If you're experiencing problems with the data, I've compiled a document that tests the data against several parameters, like data types, number ranges, and data ranges. This testing document is available under the `scripts/03-data_testing.r` file. The file contains a number of tests to run on the six `.csv` files. 
 
--   The first chunk (lines 22-38) tests data from `inputs/data/raw_response_data.csv`
--   The second chunk (lines 40-56) tests data from `inputs/data/raw_performance_data.csv`
--   The third chunk (lines 58-78) tests data from `inputs/data/raw_incident_data.csv`
-
-Before running any of these tests, you must first download the data following the steps outlined above. All of these tests should return true. If they do not, feel free to [create an issue](https://github.com/seb646/toronto-paramedic-responses/issues/new).
+Before running these tests, you must first download the data following the steps outlined above. All of these tests should return true. If they do not, feel free to [create an issue](https://github.com/seb646/happiness-and-altruism/issues/new).
 
 ### Simulate the data
 
-If you'd like to debug the problem yourself, or if you'd like to use a service like Stack Overflow for help, it's important to have some simulated data to reproduce the problem. The `scripts/04-data_simulation.qmd` file generates random, fake data based on the information initially downloaded from Open Data Toronto.
-
-## Notes
-
-### Use of Quarto files instead of R scripts
-
-I opted to use Quarto files instead of R scripts to handle processes like data testing and simulation. This allowed me to divide tasks into separate chunks capable of running independently. Although this is not standard convention, I felt it would make this project more reproducible by allowing users to identify specific errors in each chunk. By allowing code chunks to run independently, it also gives users the opportunity to continue with a process despite errors (for example, if users encounter an error with the code in one test, it has no impact on the other tests).
+If you'd like to debug the problem yourself, or if you'd like to use a service like Stack Overflow for help, it's important to have some simulated data to reproduce the problem. The `scripts/04-data_simulation.r` file generates random, fake data based on the information initially downloaded from GSS.
 
 ## Acknowledgments
 

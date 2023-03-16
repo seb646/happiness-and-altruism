@@ -18,7 +18,7 @@ thanks: "Code and data supporting this analysis is available at: https://github.
 #| warning: false
 #| output: false
 #### Preamble ####
-# Title: Does Happiness Lead to Altruism: A review of US General Social Survey data
+# Title: Happiness Does Not Cause Altruism: A review of US General Social Survey data
 # Author: Sebastian Rodriguez, Randall Ni, Iz Leitch
 # Email: me@srod.ca
 # Date: 16 March 2023
@@ -38,22 +38,22 @@ library(kableExtra)
 library(here)
 library(readr)
 
-# Fetch the the clean response data
+# Fetch the the clean happiness positive data
 happy_positive_data <- readr::read_csv(here::here("inputs/data/clean/happy_positive_data.csv"), show_col_types = FALSE)
 
-# Fetch clean performance data
+# Fetch clean directions positive data
 directions_positive_data <- readr::read_csv(here::here("inputs/data/clean/directions_positive_data.csv"), show_col_types = FALSE)
 
-# Fetch the clean incident response
+# Fetch the clean homeless positive data
 homeless_positive_data <- readr::read_csv(here::here("inputs/data/clean/homeless_positive_data.csv"), show_col_types = FALSE)
 
-# Fetch the the clean response data
+# Fetch the the clean happy negative data
 happy_negative_data <- readr::read_csv(here::here("inputs/data/clean/happy_negative_data.csv"), show_col_types = FALSE)
 
-# Fetch clean performance data
+# Fetch clean directions negative data
 directions_negative_data <- readr::read_csv(here::here("inputs/data/clean/directions_negative_data.csv"), show_col_types = FALSE)
 
-# Fetch the clean incident response
+# Fetch the clean homeless negative data
 homeless_negative_data <- readr::read_csv(here::here("inputs/data/clean/homeless_negative_data.csv"), show_col_types = FALSE)
 ```
 
@@ -96,6 +96,7 @@ The first graph (@fig-1) charts the number of people who identified as "Very hap
 #| fig-cap: "Happiness vs Giving Food or Money to the Homeless"
 #| label: fig-1
 
+# Set the colors for the lines and labels for the legend
 colors <- c(
   'Feeling "pretty happy" or "very happy"' = "steelblue",
   "Giving money or food to the homeless\n more than 2 times a year" = "darkred"
@@ -112,9 +113,16 @@ ggplot() +
   # Set the theme
   theme_minimal() +
 
+  # Import the happy positive data for the line
   geom_line(data = happy_positive_data, aes(x = year, y = people, color = 'Feeling "pretty happy" or "very happy"')) +
+
+  # Import the homeless positive data for the line
   geom_line(data = homeless_positive_data, aes(x = year, y = people, color = "Giving money or food to the homeless\n more than 2 times a year")) +
+
+  # Set scales to only be years where data is provided
   scale_x_continuous(breaks = c(2002, 2004, 2012, 2014)) +
+
+  # Set colors for the graph
   scale_color_manual(values = colors)
 ```
 
@@ -129,6 +137,7 @@ The second graph (@fig-2) charts the number of people who identified as "Not too
 #| fig-cap: "Unhappiness vs. Not Giving Food or Money to the Homeless"
 #| label: fig-2
 
+# Set the colors for the lines and labels for the legend
 colors <- c(
   'Feeling "not to happy"' = "steelblue",
   "Giving money or food to the homeless\n less than 2 times a year" = "darkred"
@@ -145,9 +154,16 @@ ggplot() +
   # Set the theme
   theme_minimal() +
 
+  # Import the happy negative data for the line
   geom_line(data = happy_negative_data, aes(x = year, y = people, color = 'Feeling "not to happy"')) +
+
+  # Import the homeless negative data for the line
   geom_line(data = homeless_negative_data, aes(x = year, y = people, color =  "Giving money or food to the homeless\n less than 2 times a year")) +
+
+  # Set scales to only be years where data is provided
   scale_x_continuous(breaks = c(2002, 2004, 2012, 2014)) +
+
+  # Set colors for the graph
   scale_color_manual(values = colors)
 ```
 
@@ -168,6 +184,7 @@ The first graph (@fig-3) charts the number of people who identified as "Very hap
 #| fig-cap: "Happiness vs Giving Directions to Strangers"
 #| label: fig-3
 
+# Set the colors for the lines and labels for the legend
 colors <- c(
   'Feeling "pretty happy" or "very happy"' = "steelblue",
   "Giving directions to a stranger\n more than 2 times a year" = "darkred"
@@ -184,9 +201,16 @@ ggplot() +
   # Set the theme
   theme_minimal() +
 
+  # Import the happy positive data for the line
   geom_line(data = happy_positive_data, aes(x = year, y = people, color = 'Feeling "pretty happy" or "very happy"')) +
+
+  # Import the directions positive data for the line
   geom_line(data = directions_positive_data, aes(x = year, y = people, color = "Giving directions to a stranger\n more than 2 times a year")) +
+
+  # Set scales to only be years where data is provided
   scale_x_continuous(breaks = c(2002, 2004, 2012, 2014)) +
+
+  # Set colors for the graph
   scale_color_manual(values = colors)
 ```
 
@@ -201,6 +225,7 @@ The second graph (@fig-4) charts the number of people who said they were "Not to
 #| fig-cap: "Unhappiness vs. Not Giving Directions to Strangers"
 #| label: fig-4
 
+# Set the colors for the lines and labels for the legend
 colors <- c(
   'Feeling "not too happy"' = "steelblue",
   "Giving directions to a stranger\n less than 2 times a year" = "darkred"
@@ -217,9 +242,16 @@ ggplot() +
   # Set the theme
   theme_minimal() +
 
+  # Import the happy negative data for the line
   geom_line(data = happy_negative_data, aes(x = year, y = people, color = 'Feeling "not too happy"')) +
+
+  # Import the directions negative data for the line
   geom_line(data = directions_negative_data, aes(x = year, y = people, color = "Giving directions to a stranger\n less than 2 times a year")) +
+
+  # Set scales to only be years where data is provided
   scale_x_continuous(breaks = c(2002, 2004, 2012, 2014)) +
+
+  # Set colors for the graph
   scale_color_manual(values = colors)
 ```
 
