@@ -2,7 +2,7 @@
 
 This repository contains all of the files necessary for an investigation of happiness and altruism in the United States using the NORC's General Social Survey (GSS) data. The aim of this study was to determine if happiness leads to altruistic behavior. 
 
-> **Note**
+> **Note**<br>
 > The research paper associated with this study is available [here](https://github.com/seb646/happiness-and-altruism/blob/main/outputs/paper/paper.pdf).
 
 ## Getting Started
@@ -14,15 +14,14 @@ This project requires both the [R programming language](https://www.r-project.or
 Once your environment is set up, you must install several packages that handle various tasks, like graphing data, creating tables, and general organization and processing. You will find a complete list of these packages in the file `scripts/00-install_dependencies.r`. You only need to run this file once to install the required dependencies.
 
 ### Download the data
+> **Note**<br>
+> A step-by-step guide for how to download this data is available [here](https://github.com/seb646/happiness-and-altruism/blob/main/guides/00-download_data.md).
 
 The first step in working with this project is to download following three data sets from the [General Social Survey](https://gssdataexplorer.norc.org).
 
 - [General Happiness](https://gssdataexplorer.norc.org/variables/434/vshow)
 - [Has Given Directions to a Stranger](https://gssdataexplorer.norc.org/variables/2886/vshow)
 - [Has Given Food or Money to a Homeless Person](https://gssdataexplorer.norc.org/variables/2878/vshow)
-
-> **Note**
-> A step-by-step guide for how to download this data is available [here](https://github.com/seb646/happiness-and-altruism/blob/main/guides/00-download_data.md).
 
 Once you download the data from GSS, place the `GSS.dat` and `GSS.dct` files in `inputs/data/raw` and run `scripts/01-data_covert.r` to conver the data to a `.csv` file. 
 
