@@ -298,12 +298,16 @@ The primary tool used to analyse data in this paper is R, an open-source statist
 ## Appendix
 
 ### Appendix A: Supplementary Survey
+The supplementary survey attached to this project is available through Google Forms: https://forms.gle/Zr2jj93bXFaaPkPdA. 
+
+#### Survey Introduction 
 Researchers have long sought to find a connection between happiness and altruistic actions. Some studies show that happiness may lead to greater levels of altruism, while others fail to find a relationship between the emotion and subsequent action. With homelessness on the rise and a growing separation between socio-economic classes, it is important to discover the leading causes of altruism. 
 
 By participating in this survey, you consent to us collecting your basic information and understand that we will be using your responses in our study. The survey is anonymous, we will not collect or share any personal identifiable information. The survey is also voluntary, and you may withdraw at any time. 
 
 If you have any questions or concerns, feel free to contact Sebastian Rodriguez (s [dot] rodriguez [at] mail [dot] utoronto [dot] ca). 
 
+#### Survey Questions
 1.  On a scale of 1-5, how happy do you feel right now?
     a. Very happy
     b. Pretty happy
@@ -324,7 +328,7 @@ If you have any questions or concerns, feel free to contact Sebastian Rodriguez 
     d. At least 2 or 3 times in the past year
     e. Once in the past year
     f. Not at all in the past year
-4.  If did not give directions to a stranger, did you want to?
+4.  If you did not give directions to a stranger, did you want to?
     a. Yes
     b. It depends on the day
     c. It depends on the time I have in the moment
@@ -348,7 +352,7 @@ If you have any questions or concerns, feel free to contact Sebastian Rodriguez 
     d. At least 2 or 3 times in the past year
     e. Once in the past year
     f. Not at all in the past year
-8.  If did not donate to a homeless person, did you want to?
+8.  If you did not donate to a homeless person, did you want to?
     a. Yes
     b. It depends on the day
     c. It depends on the money and resources at my disposal
@@ -359,6 +363,7 @@ If you have any questions or concerns, feel free to contact Sebastian Rodriguez 
     c. I did not have the money or resources to help
     d. Another factor beyond my control prevented me from helping
 
+#### Survey Conclusion
 Thank you for participating in this survey! Your responses will greatly aid our effort to understand altruism and whether happiness has any impact on the behavior. If at any time you wish to withdraw from this survey, please contact Sebastian Rodriguez (s [dot] rodriguez [at] mail [dot] utoronto [dot] ca). 
 
 ## References
