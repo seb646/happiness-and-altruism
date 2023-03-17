@@ -9,7 +9,7 @@ editor: visual
 toc: TRUE
 number-sections: TRUE
 bibliography: references.bib
-thanks: "Code and data supporting this analysis is available at: https://github.com/seb646/happiness-and-altruism"
+thanks: "Code and data supporting this analysis is available at: [https://github.com/seb646/happiness-and-altruism](https://github.com/seb646/happiness-and-altruism)"
 ---
 
 ```{r}
@@ -273,7 +273,7 @@ While this study suggests a lack of a relationship between happiness and altruis
 
 **Land Acknowledgement**
 
-We wish to acknowledge the land on which this data was collected and analysed. For thousands of years, it has been the traditional land of the Huron-Wendat, the Seneca, and the Mississaugas of the Credit. Today, this meeting place is still the home to many Indigenous people from across Turtle Island and we are grateful to have the opportunity to work on this land.
+We wish to acknowledge the land on which this data was analysed. For thousands of years, it has been the traditional land of the Huron-Wendat, the Seneca, and the Mississaugas of the Credit. Today, this meeting place is still the home to many Indigenous people from across Turtle Island and we are grateful to have the opportunity to work on this land.
 
 This statement was originally prepared in consultation with First Nations House and the Elders Circle for use at the University of Toronto [@cite_land_acknowledgement].\
 
@@ -285,11 +285,11 @@ The data used in this paper was obtained through the General Social Survey (GSS)
 -   Has Given Directions to a Stranger[^2]
 -   Has Given Money or Food to a Homeless Person[^3]
 
-[^1]: General Happiness data is available at: https://gssdataexplorer.norc.org/variables/434/vshow
+[^1]: General Happiness data is available at: [https://gssdataexplorer.norc.org/variables/434/vshow](https://gssdataexplorer.norc.org/variables/434/vshow)
 
-[^2]: Has Given Directions to a Stranger data is available at: https://gssdataexplorer.norc.org/variables/2886/vshow
+[^2]: Has Given Directions to a Stranger data is available at: [https://gssdataexplorer.norc.org/variables/2886/vshow](https://gssdataexplorer.norc.org/variables/2886/vshow)
 
-[^3]: Has Given Money or Food to a Homeless Person data is available at: https://gssdataexplorer.norc.org/variables/2878/vshow
+[^3]: Has Given Money or Food to a Homeless Person data is available at: [https://gssdataexplorer.norc.org/variables/2878/vshow](https://gssdataexplorer.norc.org/variables/2878/vshow)\
 
 **Resources Acknowledgment**
 
@@ -299,7 +299,8 @@ The primary tool used to analyse data in this paper is R, an open-source statist
 
 ### Appendix A: Raw Data
 
-#### Happiness
+**Happiness** 
+
 ```{r}
 #| messages: false
 #| echo: false
@@ -331,8 +332,9 @@ summarized_happiness_data |>
   # Increase width of first column
   column_spec(1, width = "10em")
 ```
+\
 
-#### Donating to the Homeless
+**Donating to the Homeless**
 ```{r}
 #| messages: false
 #| echo: false
@@ -364,8 +366,10 @@ summarized_homeless_data |>
   # Increase width of first column
   column_spec(1, width = "10em")
 ```
+\
 
-#### Giving Directions to a Stanger
+**Giving Directions to a Stranger**
+
 ```{r}
 #| messages: false
 #| echo: false
@@ -397,18 +401,21 @@ summarized_directions_data |>
   # Increase width of first column
   column_spec(1, width = "10em")
 ```
+\newpage
 
 ### Appendix B: Supplementary Survey
-The supplementary survey attached to this project is available through Google Forms: https://forms.gle/Zr2jj93bXFaaPkPdA. 
+The supplementary survey attached to this project is available through Google Forms: [https://forms.gle/Zr2jj93bXFaaPkPdA](https://forms.gle/Zr2jj93bXFaaPkPdA). \
 
-#### Survey Introduction 
+**Survey Introduction**
+
 Researchers have long sought to find a connection between happiness and altruistic actions. Some studies show that happiness may lead to greater levels of altruism, while others fail to find a relationship between the emotion and subsequent action. With homelessness on the rise and a growing separation between socio-economic classes, it is important to discover the leading causes of altruism. 
 
 By participating in this survey, you consent to us collecting your basic information and understand that we will be using your responses in our study. The survey is anonymous, we will not collect or share any personal identifiable information. The survey is also voluntary, and you may withdraw at any time. 
 
-If you have any questions or concerns, feel free to contact Sebastian Rodriguez (s [dot] rodriguez [at] mail [dot] utoronto [dot] ca). 
+If you have any questions or concerns, feel free to contact Sebastian Rodriguez (s [dot] rodriguez [at] mail [dot] utoronto [dot] ca). \
 
-#### Survey Questions
+**Survey Questions**
+
 1.  On a scale of 1-5, how happy do you feel right now?
     a. Very happy
     b. Pretty happy
@@ -462,10 +469,13 @@ If you have any questions or concerns, feel free to contact Sebastian Rodriguez 
     a. I do not live in an area with a lot of homeless people
     b. I did not have the time to help
     c. I did not have the money or resources to help
-    d. Another factor beyond my control prevented me from helping
+    d. Another factor beyond my control prevented me from helping\
 
-#### Survey Conclusion
+**Survey Conclusion**
+
 Thank you for participating in this survey! Your responses will greatly aid our effort to understand altruism and whether happiness has any impact on the behavior. If at any time you wish to withdraw from this survey, please contact Sebastian Rodriguez (s [dot] rodriguez [at] mail [dot] utoronto [dot] ca). 
+
+\newpage
 
 ## References
 
