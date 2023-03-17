@@ -1,7 +1,7 @@
 ---
 title: "Happiness Does Not Cause Altruism: A review of US General Social Survey data"
 format: pdf
-author: "Sebastian Rodriguez, Randall Ni, Iz Leitch"
+author: "Sebastian Rodriguez, Laura Lee-Chu, Iz Leitch"
 abstract: "The relationship between happiness and altruistic behaviors has been the subject of much research, with some studies suggesting a positive correlation and others finding no significant relationship. This paper examines the existing literature on the topic in addition to the survey results provided by NORC’s General Social Survey (GSS) of United States residents and analyzes the data to draw conclusions. Based on the available evidence, it appears that there is little to no relationship between happiness and altruistic behaviors, suggesting that individuals may engage in altruistic acts for reasons other than personal happiness." 
 date: today
 date-format: long
@@ -19,7 +19,7 @@ thanks: "Code and data supporting this analysis is available at: https://github.
 #| output: false
 #### Preamble ####
 # Title: Happiness Does Not Cause Altruism: A review of US General Social Survey data
-# Author: Sebastian Rodriguez, Randall Ni, Iz Leitch
+# Author: Sebastian Rodriguez, Laura Lee-Chu, Iz Leitch
 # Email: me@srod.ca
 # Date: 16 March 2023
 # GitHub: https://github.com/seb646/happiness-and-altruism
@@ -297,7 +297,108 @@ The primary tool used to analyse data in this paper is R, an open-source statist
 
 ## Appendix
 
-### Appendix A: Supplementary Survey
+### Appendix A: Raw Data
+
+#### Happiness
+```{r}
+#| messages: false
+#| echo: false
+#| warning: false
+#| fig-cap: "Raw GSS Data: General Happiness (by year)"
+#| label: fig-5
+#### Create a table summarizing happiness data from GSS ####
+summarized_happiness_data <- merge(x = happy_positive_data, y = happy_negative_data, by = "year", all.x = TRUE) |>
+   # Rename columns
+  rename("Year" = "year", '"Very" or "Pretty" happy' = "people.x", '"Not too happy"' = "people.y")
+  
+summarized_happiness_data |>
+  # Table configuration
+  knitr::kable(align = "l", booktabs = TRUE, escape = FALSE, linesep = "") |>
+
+  # Add headers for table data
+  add_header_above(
+    c(" ", "Number of People Feeling" = 2),
+    align = "c",
+    bold = TRUE
+  ) |>
+
+  # Style the table
+  kable_styling(font_size = 10, latex_options = "hold_position", full_width = TRUE) |>
+
+  # Make the table headers bold
+  row_spec(0, bold = TRUE) |>
+
+  # Increase width of first column
+  column_spec(1, width = "10em")
+```
+
+#### Donating to the Homeless
+```{r}
+#| messages: false
+#| echo: false
+#| warning: false
+#| fig-cap: "Raw GSS Data: Giving Food or Money to the Homeless (by year)"
+#| label: fig-6
+#### Create a table summarizing homeless donation data from GSS ####
+summarized_homeless_data <- merge(x = homeless_positive_data, y = homeless_negative_data, by = "year", all.x = TRUE) |>
+   # Rename columns
+  rename("Year" = "year", 'At least twice a year' = "people.x", 'Less than twice a year' = "people.y")
+  
+summarized_homeless_data |>
+  # Table configuration
+  knitr::kable(align = "l", booktabs = TRUE, escape = FALSE, linesep = "") |>
+
+  # Add headers for table data
+  add_header_above(
+    c(" ", "Number of People Donating to the Homeless" = 2),
+    align = "c",
+    bold = TRUE
+  ) |>
+
+  # Style the table
+  kable_styling(font_size = 10, latex_options = "hold_position", full_width = TRUE) |>
+
+  # Make the table headers bold
+  row_spec(0, bold = TRUE) |>
+
+  # Increase width of first column
+  column_spec(1, width = "10em")
+```
+
+#### Giving Directions to a Stanger
+```{r}
+#| messages: false
+#| echo: false
+#| warning: false
+#| fig-cap: "Raw GSS Data: Giving Directions to a Stanger (by year)"
+#| label: fig-7
+#### Create a table summarizing giving strangers directions data from GSS ####
+summarized_directions_data <- merge(x = directions_positive_data, y = directions_negative_data, by = "year", all.x = TRUE) |>
+   # Rename columns
+  rename("Year" = "year", 'At least twice a year' = "people.x", 'Less than twice a year' = "people.y")
+  
+summarized_directions_data |>
+  # Table configuration
+  knitr::kable(align = "l", booktabs = TRUE, escape = FALSE, linesep = "") |>
+
+  # Add headers for table data
+  add_header_above(
+    c(" ", "Number of People Giving Strangers Directions" = 2),
+    align = "c",
+    bold = TRUE
+  ) |>
+
+  # Style the table
+  kable_styling(font_size = 10, latex_options = "hold_position", full_width = TRUE) |>
+
+  # Make the table headers bold
+  row_spec(0, bold = TRUE) |>
+
+  # Increase width of first column
+  column_spec(1, width = "10em")
+```
+
+### Appendix B: Supplementary Survey
 The supplementary survey attached to this project is available through Google Forms: https://forms.gle/Zr2jj93bXFaaPkPdA. 
 
 #### Survey Introduction 

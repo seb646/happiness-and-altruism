@@ -1,6 +1,6 @@
 #### Preamble ####
 # Purpose: Import raw csv data, clean it, and generate new csv files
-# Author: Sebastian Rodriguez, Randall Ni, Iz Leitch
+# Author: Sebastian Rodriguez, Laura Lee-Chu, Iz Leitch
 # Email: me@srod.ca
 # Date: 16 March 2023
 # GitHub: https://github.com/seb646/happiness-and-altruism
