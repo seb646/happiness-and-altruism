@@ -81,7 +81,26 @@ Question 1 allows participants to respond with "Very happy", "Pretty Happy", "No
 
 The survey's question about happiness was the only variable that tracked general happiness with the most complete set of data. Other options included happiness of marriage, happiness in relation to "today" (the day the survey was taken), and a sparsely collected "how happy would you say you are, on the whole." The other datasets either did not relate to this study's research question or lacked the data to provide meaningful insights.
 
-Questions about altruism had a significantly greater range when compared to questions about happiness. The survey's questions on altruism ranged from social actions to financial donations. The two questions selected for study, giving directions to strangers and giving food or money to the homeless, offered the greatest range of representative responses---it combined both social and financial altruism. \newpage 
+Questions about altruism had a significantly greater range when compared to questions about happiness. The survey's questions on altruism ranged from social actions to financial donations. The two questions selected for study, giving directions to strangers and giving food or money to the homeless, offered the greatest range of representative responses---it combined both social and financial altruism.
+
+### Methodology
+The survey frame is the list of all households in the United States obtained from the U.S. Census Bureau. The GSS uses a multistage, stratified sampling design to select a representative sample of households to select individual respondents from the population of interest, which is non-institutionalized adults 18 and older living in the U.S. [@cite_gss_handbook]. The sample is then selected using a combination of random and quota sampling. The sample is recruited through a combination of in-person and telephone recruitment where interviewers visit selected households or call selected telephone numbers. A small monetary incentive is offered to respondents to participate in the survey.
+
+The GSS uses a multistage, stratified sampling approach, which divides the population into strata based on geographic region, race/ethnicity, and other demographic factors. Within each stratum, a sample of households is chosen at random, and within each selected household, eligible individuals are selected using quota sampling. The survey weights are adjusted to account for non-response bias by sub-sampling non-respondents. 
+
+The sampling design ensures that the sample is representative of the U.S. population.  Their high response rate and large sample size allow for greater precision in the estimates and make it possible to detect smaller differences between groups. The longitudinal design enables the examination of changes in attitudes and behaviours over time. 
+
+The use of quota sampling in the GSS allows for greater control over the composition of the sample, which can be useful for ensuring that certain demographic groups are adequately represented. However, quota sampling can also introduce biases if not strictly adhered to by the interviewers. Additionally, the use of in-person and telephone recruitment may introduce biases if certain groups are more likely to participate through one mode of recruitment than the other. Furthermore, the GSS relies on self-reported data, and respondents may not always provide accurate or truthful answers. While the GSS is designed to be representative of the U.S. population, there may still be limitations in its generalizability to specific subgroups, such as individuals with lower levels of education or those living in rural areas. Until 2006, the GSS only sampled the English-speaking population, limiting representation accuracy. Spanish speakers usually make up 60-65% of the language exclusions while about a dozen languages make up the remaining exclusions [@cite_gss_handbook].\
+
+**Questionnaire**
+
+The GSS uses standardized questions and response options, enabling easier comparisons of responses over time and across different demographic groups. A positive aspect of the questions on altruism is that the responses explore multiple dimensions of altruistic behaviour by factoring in the frequency and extent of these behaviours.  
+
+However, there are significant limitations to the questionnaires.[^1] The happiness questions provided a limited range of answers, which may not capture the full range of respondents' experiences or influencing factors. Additionally, responses to questions about happiness and altruism rely on self-report, which could be influenced by social desirability and other cognitive biases and result in inaccurate reports. 
+
+[^1]: Archived GSS sample questionnaires are available at: <https://gss.norc.org/get-documentation/questionnaires>
+
+\newpage
 
 ### Happiness and Donating to the Homeless
 
@@ -281,15 +300,15 @@ This statement was originally prepared in consultation with First Nations House 
 
 The data used in this paper was obtained through the General Social Survey (GSS), a project of the independent research organization NORC at the University of Chicago, with principal funding from the National Science Foundation. This paper uses three data sets from the NORC's GSS:
 
--   General Happiness[^1]
--   Has Given Directions to a Stranger[^2]
--   Has Given Money or Food to a Homeless Person[^3]
+-   General Happiness[^2]
+-   Has Given Directions to a Stranger[^3]
+-   Has Given Money or Food to a Homeless Person[^4]
 
-[^1]: General Happiness data is available at: [https://gssdataexplorer.norc.org/variables/434/vshow](https://gssdataexplorer.norc.org/variables/434/vshow)
+[^2]: General Happiness data is available at: <https://gssdataexplorer.norc.org/variables/434/vshow>
 
-[^2]: Has Given Directions to a Stranger data is available at: [https://gssdataexplorer.norc.org/variables/2886/vshow](https://gssdataexplorer.norc.org/variables/2886/vshow)
+[^3]: Has Given Directions to a Stranger data is available at: <https://gssdataexplorer.norc.org/variables/2886/vshow>
 
-[^3]: Has Given Money or Food to a Homeless Person data is available at: [https://gssdataexplorer.norc.org/variables/2878/vshow](https://gssdataexplorer.norc.org/variables/2878/vshow)\
+[^4]: Has Given Money or Food to a Homeless Person data is available at: <https://gssdataexplorer.norc.org/variables/2878/vshow>\
 
 **Resources Acknowledgment**
 
@@ -299,7 +318,7 @@ The primary tool used to analyse data in this paper is R, an open-source statist
 
 ### Appendix A: Raw Data
 
-**Happiness** 
+**Happiness**
 
 ```{r}
 #| messages: false
@@ -332,9 +351,11 @@ summarized_happiness_data |>
   # Increase width of first column
   column_spec(1, width = "10em")
 ```
+
 \
 
 **Donating to the Homeless**
+
 ```{r}
 #| messages: false
 #| echo: false
@@ -366,6 +387,7 @@ summarized_homeless_data |>
   # Increase width of first column
   column_spec(1, width = "10em")
 ```
+
 \
 
 **Giving Directions to a Stranger**
@@ -401,79 +423,81 @@ summarized_directions_data |>
   # Increase width of first column
   column_spec(1, width = "10em")
 ```
+
 \newpage
 
 ### Appendix B: Supplementary Survey
-The supplementary survey attached to this project is available through Google Forms: [https://forms.gle/Zr2jj93bXFaaPkPdA](https://forms.gle/Zr2jj93bXFaaPkPdA). \
+
+The supplementary survey attached to this project is available through Google Forms: <https://forms.gle/Zr2jj93bXFaaPkPdA>.\
 
 **Survey Introduction**
 
-Researchers have long sought to find a connection between happiness and altruistic actions. Some studies show that happiness may lead to greater levels of altruism, while others fail to find a relationship between the emotion and subsequent action. With homelessness on the rise and a growing separation between socio-economic classes, it is important to discover the leading causes of altruism. 
+Researchers have long sought to find a connection between happiness and altruistic actions. Some studies show that happiness may lead to greater levels of altruism, while others fail to find a relationship between the emotion and subsequent action. With homelessness on the rise and a growing separation between socio-economic classes, it is important to discover the leading causes of altruism.
 
-By participating in this survey, you consent to us collecting your basic information and understand that we will be using your responses in our study. The survey is anonymous, we will not collect or share any personal identifiable information. The survey is also voluntary, and you may withdraw at any time. 
+By participating in this survey, you consent to us collecting your basic information and understand that we will be using your responses in our study. The survey is anonymous, we will not collect or share any personal identifiable information. The survey is also voluntary, and you may withdraw at any time.
 
-If you have any questions or concerns, feel free to contact Sebastian Rodriguez (s [dot] rodriguez [at] mail [dot] utoronto [dot] ca). \
+If you have any questions or concerns, feel free to contact Sebastian Rodriguez (s \[dot\] rodriguez \[at\] mail \[dot\] utoronto \[dot\] ca).\
 
 **Survey Questions**
 
 1.  On a scale of 1-5, how happy do you feel right now?
-    a. Very happy
-    b. Pretty happy
-    c. Happy
-    d. Not too happy
-    e. Unhappy
+    a.  Very happy
+    b.  Pretty happy
+    c.  Happy
+    d.  Not too happy
+    e.  Unhappy
 2.  How often have you given directions to a stranger in the past year?
-    a. More than once a week
-    b. Once a week
-    c. Once a month 
-    d. At least 2 or 3 times in the past year
-    e. Once in the past year
-    f. Not at all in the past year
+    a.  More than once a week
+    b.  Once a week
+    c.  Once a month
+    d.  At least 2 or 3 times in the past year
+    e.  Once in the past year
+    f.  Not at all in the past year
 3.  How often are you given the opportunity to give directions to a stranger?
-    a. More than once a week
-    b. Once a week
-    c. Once a month 
-    d. At least 2 or 3 times in the past year
-    e. Once in the past year
-    f. Not at all in the past year
+    a.  More than once a week
+    b.  Once a week
+    c.  Once a month
+    d.  At least 2 or 3 times in the past year
+    e.  Once in the past year
+    f.  Not at all in the past year
 4.  If you did not give directions to a stranger, did you want to?
-    a. Yes
-    b. It depends on the day
-    c. It depends on the time I have in the moment
-    d. No
+    a.  Yes
+    b.  It depends on the day
+    c.  It depends on the time I have in the moment
+    d.  No
 5.  If you had the desire but did not give directions to a stranger, what prevented you from doing so?
-    a. I do not live in an area with a lot of strangers asking for directions
-    b. I did not have the time to help
-    c. I did not know enough about the area to be helpful
-    d. Another factor beyond my control prevented me from helping
+    a.  I do not live in an area with a lot of strangers asking for directions
+    b.  I did not have the time to help
+    c.  I did not know enough about the area to be helpful
+    d.  Another factor beyond my control prevented me from helping
 6.  How often have you donated food or money to a homeless person in the past year?
-    a. More than once a week
-    b. Once a week
-    c. Once a month 
-    d. At least 2 or 3 times in the past year
-    e. Once in the past year
-    f. Not at all in the past year
+    a.  More than once a week
+    b.  Once a week
+    c.  Once a month
+    d.  At least 2 or 3 times in the past year
+    e.  Once in the past year
+    f.  Not at all in the past year
 7.  How often are you given the opportunity to donate to a homeless person?
-    a. More than once a week
-    b. Once a week
-    c. Once a month 
-    d. At least 2 or 3 times in the past year
-    e. Once in the past year
-    f. Not at all in the past year
+    a.  More than once a week
+    b.  Once a week
+    c.  Once a month
+    d.  At least 2 or 3 times in the past year
+    e.  Once in the past year
+    f.  Not at all in the past year
 8.  If you did not donate to a homeless person, did you want to?
-    a. Yes
-    b. It depends on the day
-    c. It depends on the money and resources at my disposal
-    d. No
+    a.  Yes
+    b.  It depends on the day
+    c.  It depends on the money and resources at my disposal
+    d.  No
 9.  If you had the desire but did not donate to a homeless person, what prevented you from doing so?
-    a. I do not live in an area with a lot of homeless people
-    b. I did not have the time to help
-    c. I did not have the money or resources to help
-    d. Another factor beyond my control prevented me from helping\
+    a.  I do not live in an area with a lot of homeless people
+    b.  I did not have the time to help
+    c.  I did not have the money or resources to help
+    d.  Another factor beyond my control prevented me from helping\
 
 **Survey Conclusion**
 
-Thank you for participating in this survey! Your responses will greatly aid our effort to understand altruism and whether happiness has any impact on the behavior. If at any time you wish to withdraw from this survey, please contact Sebastian Rodriguez (s [dot] rodriguez [at] mail [dot] utoronto [dot] ca). 
+Thank you for participating in this survey! Your responses will greatly aid our effort to understand altruism and whether happiness has any impact on the behavior. If at any time you wish to withdraw from this survey, please contact Sebastian Rodriguez (s \[dot\] rodriguez \[at\] mail \[dot\] utoronto \[dot\] ca).
 
 \newpage
 
